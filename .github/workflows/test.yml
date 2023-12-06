@@ -32,13 +32,13 @@ jobs:
     - name: Install dependencies
       run: pip install -e '.[linting,testing]' --extra-index-url https://download.pytorch.org/whl/cpu
     - name: List all installed modules
-      run: pip install pre-commit && pip list
+      run: pip list
     - name: Repo line count
       run: python sz.py
     - name: Lint with pylint
       run: python -m pylint --disable=all -e W0311 -e C0303 --jobs=0 --indent-string='  ' **/*.py
-    - name: Install pre-commit
-      run:  echo "$(which pre-commit)" && pre-commit install
+    # - name: Install pre-commit
+    #   run:  echo "$(which pre-commit)" && pre-commit install
     
     # - name: Lint with ruff
     #   run: |
