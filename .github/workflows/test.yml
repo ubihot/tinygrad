@@ -31,6 +31,8 @@ jobs:
         key: linting-packages-${{ hashFiles('**/setup.py') }}-3.8
     - name: Install dependencies
       run: pip install -e '.[linting,testing]' --extra-index-url https://download.pytorch.org/whl/cpu
+    - name: List all installed modules
+      run: pip list
     - name: Repo line count
       run: python sz.py
     - name: Lint with pylint
