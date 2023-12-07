@@ -45,6 +45,7 @@ jobs:
     #     pip3 install --upgrade --force-reinstall ruff
     #     python3 -m ruff . --preview
     - name: Lint tinygrad with pylint
+      uses: pre-commit/action@v3.0.0
       run: pre-commit run mypy # python -m pylint tinygrad/
     - name: Run mypy
       run: python -m mypy
