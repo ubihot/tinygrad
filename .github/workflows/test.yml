@@ -82,7 +82,7 @@ jobs:
     - name: pre-commit
       run: |
         echo $GITHUB_WORKSPACE
-        ls -l
+        ls -la
         pre-commit --version
     # - name: Lint with pylint
     #   run: python -m pylint --disable=all -e W0311 -e C0303 --jobs=0 --indent-string='  ' **/*.py
