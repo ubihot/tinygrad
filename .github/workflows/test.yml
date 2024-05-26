@@ -83,8 +83,8 @@ jobs:
       run: |
         echo $GITHUB_WORKSPACE
         ls -la
-        which pre-commit
-        pre-commit --version
+        pip install pre-commit
+        pre-commit run --all
     # - name: Lint with pylint
     #   run: python -m pylint --disable=all -e W0311 -e C0303 --jobs=0 --indent-string='  ' **/*.py
     # - name: Lint with ruff
