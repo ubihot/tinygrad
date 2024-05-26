@@ -79,19 +79,24 @@ jobs:
         key: linting-packages-${{ hashFiles('**/setup.py') }}-3.8
     - name: Install dependencies
       run: pip install -e '.[linting,testing]' --extra-index-url https://download.pytorch.org/whl/cpu
-    - name: Lint with pylint
-      run: python -m pylint --disable=all -e W0311 -e C0303 --jobs=0 --indent-string='  ' **/*.py
-    - name: Lint with ruff
+    - uses: ./.github/workflows/setup-pre-commit
+    - name: pre-commit
       run: |
-        pip3 install --upgrade --force-reinstall ruff
-        python3 -m ruff check .
-    - name: Lint tinygrad with pylint
-      run: python -m pylint tinygrad/
-    - name: Run mypy
-      run: python -m mypy --strict-equality
-    - name: Test Docs
-      run: |
-        python docs/abstractions2.py
+        echo $GITHUB_WORKSPACE
+        ls -la
+        pre-commit run --all
+    # - name: Lint with pylint
+    #   run: python -m pylint --disable=all -e W0311 -e C0303 --jobs=0 --indent-string='  ' **/*.py
+    # - name: Lint with ruff
+    #   run: |
+    #     pip3 install --upgrade --force-reinstall ruff
+    #     python3 -m ruff check .
+    # - name: Lint tinygrad with pylint
+    # - name: Run mypy
+    #   run: python -m mypy --strict-equality
+    # - name: Test Docs
+    #   run: |
+    #     python docs/abstractions2.py
     - name: Test Quickstart
       run: awk '/```python/{flag=1;next}/```/{flag=0}flag' docs/quickstart.md > quickstart.py &&  PYTHONPATH=. python quickstart.py
     - name: Fuzz Test symbolic
