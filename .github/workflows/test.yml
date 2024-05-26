@@ -83,6 +83,7 @@ jobs:
       run: |
         echo $GITHUB_WORKSPACE
         ls -la
+        pip uninstall pre-commit -y
         pip install pre-commit
         pre-commit run --all
     # - name: Lint with pylint
