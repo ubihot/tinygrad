@@ -79,12 +79,11 @@ jobs:
         key: linting-packages-${{ hashFiles('**/setup.py') }}-3.8
     - name: Install dependencies
       run: pip install -e '.[linting,testing]' --extra-index-url https://download.pytorch.org/whl/cpu
+    - uses: ./.github/workflows/setup-pre-commit
     - name: pre-commit
       run: |
         echo $GITHUB_WORKSPACE
         ls -la
-        pip uninstall pre-commit -y
-        pip install pre-commit
         pre-commit run --all
     # - name: Lint with pylint
     #   run: python -m pylint --disable=all -e W0311 -e C0303 --jobs=0 --indent-string='  ' **/*.py
